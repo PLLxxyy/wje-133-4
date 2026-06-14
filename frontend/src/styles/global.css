@@ -255,6 +255,32 @@ input[type='range'] {
   background: color-mix(in oklch, var(--accent) 16%, var(--surface));
 }
 
+.favorite-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  background: var(--surface-muted);
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0.35rem;
+  transition:
+    border-color 150ms ease,
+    background-color 150ms ease,
+    color 150ms ease;
+}
+
+.favorite-button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.favorite-button[data-active='true'] {
+  border-color: var(--accent);
+  background: color-mix(in oklch, var(--accent) 16%, var(--surface));
+  color: var(--accent);
+}
+
 .segmented-control {
   display: flex;
   width: fit-content;

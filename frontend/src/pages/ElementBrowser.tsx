@@ -1,14 +1,16 @@
-import { Search } from 'lucide-react';
+import { Heart, Search } from 'lucide-react';
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { PropertyPanel } from '../components/common/PropertyPanel';
 import { EmptyState } from '../components/common/EmptyState';
 import { useElementStore } from '../stores/elementStore';
+import { useFavoriteStore } from '../stores/favoriteStore';
 import { useLayerStore } from '../stores/layerStore';
 
 export function ElementBrowser() {
   const { elements, selectedElementId, selectElement, searchTerm, setSearchTerm } =
     useElementStore();
+  const { favoriteIds, toggleFavorite } = useFavoriteStore();
   const { layers } = useLayerStore();
   const selectedElement = elements.find((element) => element.id === selectedElementId) ?? null;
   const selectedLayer = layers.find((layer) => layer.id === selectedElement?.layerId);
@@ -79,16 +81,30 @@ export function ElementBrowser() {
                             {element.type} · {element.material}
                           </span>
                         </span>
-                        <Link
-                          className="text-xs font-semibold text-[color:var(--accent)]"
-                          to="/viewer"
-                          onClick={(event) => {
-                            event.stopPropagation();
-                            selectElement(element.id);
-                          }}
-                        >
-                          定位
-                        </Link>
+                        <span className="flex items-center gap-2">
+                          <span
+                            className="favorite-button"
+                            data-active={favoriteIds.has(element.id)}
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              toggleFavorite(element.id);
+                            }}
+                            role="button"
+                            tabIndex={0}
+                          >
+                            <Heart className="h-4 w-4" />
+                          </span>
+                          <Link
+                            className="text-xs font-semibold text-[color:var(--accent)]"
+                            to="/viewer"
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              selectElement(element.id);
+                            }}
+                          >
+                            定位
+                          </Link>
+                        </span>
                       </button>
                     ))}
                   </div>

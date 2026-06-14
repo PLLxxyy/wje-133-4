@@ -4,6 +4,7 @@ import {
   Building2,
   Camera,
   Cuboid,
+  Heart,
   MessageSquare,
   Moon,
   Scissors,
@@ -23,6 +24,7 @@ const navItems = [
   { to: '/viewer', label: '3D 主视图', icon: Building2 },
   { to: '/viewpoints', label: '视角', icon: Camera },
   { to: '/elements', label: '构件', icon: Cuboid },
+  { to: '/favorites', label: '收藏', icon: Heart },
   { to: '/annotations', label: '标注', icon: MessageSquare },
   { to: '/sections', label: '剖面', icon: Scissors }
 ];

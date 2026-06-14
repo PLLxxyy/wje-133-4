@@ -1,5 +1,6 @@
-import { Box, MapPin } from 'lucide-react';
+import { Box, Heart, MapPin } from 'lucide-react';
 import type { BuildingElement, ModelLayer } from '../../types';
+import { useFavoriteStore } from '../../stores/favoriteStore';
 import { formatVector } from '../../utils/threeUtils';
 
 interface PropertyPanelProps {
@@ -8,6 +9,8 @@ interface PropertyPanelProps {
 }
 
 export function PropertyPanel({ element, layer }: PropertyPanelProps) {
+  const { favoriteIds, toggleFavorite } = useFavoriteStore();
+
   if (!element) {
     return (
       <aside className="panel p-5">
@@ -30,11 +33,23 @@ export function PropertyPanel({ element, layer }: PropertyPanelProps) {
             {element.name}
           </h2>
         </div>
-        <span
-          className="inline-flex h-10 w-10 items-center justify-center border border-[color:var(--border)]"
-          style={{ background: layer?.color }}
-        >
-          <Box className="h-5 w-5 text-white" />
+        <span className="flex items-center gap-2">
+          <span
+            className="favorite-button"
+            data-active={favoriteIds.has(element.id)}
+            onClick={() => toggleFavorite(element.id)}
+            role="button"
+            tabIndex={0}
+            title={favoriteIds.has(element.id) ? '取消收藏' : '收藏'}
+          >
+            <Heart className="h-4 w-4" />
+          </span>
+          <span
+            className="inline-flex h-10 w-10 items-center justify-center border border-[color:var(--border)]"
+            style={{ background: layer?.color }}
+          >
+            <Box className="h-5 w-5 text-white" />
+          </span>
         </span>
       </div>
 

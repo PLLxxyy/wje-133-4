@@ -1,6 +1,7 @@
 import { Navigate, createBrowserRouter } from 'react-router-dom';
 import { AnnotationManage } from '../pages/AnnotationManage';
 import { ElementBrowser } from '../pages/ElementBrowser';
+import { FavoriteManage } from '../pages/FavoriteManage';
 import { SectionAnalysis } from '../pages/SectionAnalysis';
 import { Viewer } from '../pages/Viewer';
 import { ViewpointManage } from '../pages/ViewpointManage';
@@ -15,6 +16,7 @@ export const router = createBrowserRouter([
       { path: 'viewer', element: <Viewer /> },
       { path: 'viewpoints', element: <ViewpointManage /> },
       { path: 'elements', element: <ElementBrowser /> },
+      { path: 'favorites', element: <FavoriteManage /> },
       { path: 'annotations', element: <AnnotationManage /> },
       { path: 'sections', element: <SectionAnalysis /> },
       { path: '*', element: <Navigate to="/viewer" replace /> }
